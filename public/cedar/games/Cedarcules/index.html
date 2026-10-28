@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <title>Cedarcules</title>
+    <link id="cedar-loader-style" rel="stylesheet" href="/cedar/runtime/loader.css?v=3">
+    <link id="cedar-global-theme" rel="stylesheet" href="/cedar/runtime/cedar-slot.css?v=5">
+    <link id="cedar-game-theme" rel="stylesheet" href="/cedar/games/Cedarcules/theme.css?v=4">
+    <style>html,body{margin:0;min-height:100%;background:#070b14;color:#fff}.cedar-loader{position:fixed;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;background:#070b14;font:14px system-ui,sans-serif}.cedar-loader[hidden]{display:none!important}.cedar-loader-mark{width:72px;height:72px;display:grid;place-items:center;border:2px solid #f5c451;border-radius:20px;color:#f5c451;font:700 42px Georgia,serif}.cedar-loader-title{font-weight:700;letter-spacing:.35em}.cedar-loader.is-error{color:#fecaca}.cedar-loader a{color:#f5c451}</style>
+    <script>
+        window.cedarBootError=function(error){var loader=document.getElementById('cedar-loader'),message=document.getElementById('cedar-loader-message');if(loader)loader.classList.add('is-error');if(message)message.innerHTML=(error&&error.message?error.message:'Game startup failed.')+'<br><a href="/">Return to the lobby</a>';};
+        window.addEventListener('promex:stage',function(event){var message=document.getElementById('cedar-loader-message');if(message&&event.detail&&event.detail.message)message.textContent=event.detail.message;});
+        window.addEventListener('promex:game-error',function(event){window.cedarBootError(event.detail&&event.detail.error?event.detail.error:new Error('Secure game runtime failed.'));});
+        window.addEventListener('error',function(event){window.cedarBootError(event.error||new Error(event.message));});
+        window.addEventListener('unhandledrejection',function(event){window.cedarBootError(event.reason||new Error('Game startup failed.'));});
+    </script>
+</head>
+<body>
+    <div id="cedar-loader" class="cedar-loader" role="status">
+        <div class="cedar-loader-mark">C</div><div class="cedar-loader-title">CEDAR</div>
+        <div id="cedar-loader-message">Securing licensed game session...</div><div class="cedar-loader-bar"><i></i></div>
+    </div>
+    <main id="cedar-slot" class="cedar-slot" hidden>
+        <header class="cedar-head"><div><small id="cedar-brand">CEDAR</small><h1 id="cedar-title">Cedarcules</h1></div><a href="/" class="cedar-home">Lobby</a></header>
+        <section class="cedar-stage">
+            <div class="cedar-reels"><img id="cedar-frame" class="cedar-frame" alt=""><div id="cedar-grid" class="cedar-grid" aria-label="Five reel slot grid"></div></div>
+            <div id="cedar-result" class="cedar-result" aria-live="polite">Choose a stake and spin</div>
+        </section>
+        <section class="cedar-controls">
+            <div class="cedar-meter"><span>Balance</span><strong id="cedar-balance">--</strong></div>
+            <label class="cedar-bet">Stake<select id="cedar-wager"></select></label>
+            <button id="cedar-speed" class="cedar-speed" type="button" aria-pressed="false">FAST OFF</button>
+            <button id="cedar-spin" class="cedar-spin" type="button">SPIN</button>
+            <div class="cedar-meter"><span>Last win</span><strong id="cedar-win">0.00</strong></div>
+        </section>
+        <footer><span id="cedar-rtp"></span><span>Provably fair - fixed math</span></footer>
+    </main>
+    <script src="/cedar/runtime/local-bridge.js?v=3"></script>
+    <script src="/js/game-session.js?v=6" data-csrf="cedar-demo-csrf" data-runtime-game="Cedarcules"></script>
+    <script src="/js/cedar-client.js?v=6"></script>
+    <script src="/cedar/runtime/promex-html-game.js?v=8" data-game="Cedarcules"></script>
+    <script src="/cedar/runtime/cedar-slot.js?v=8"></script>
+</body>
+</html>
+
+

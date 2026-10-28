@@ -1,0 +1,1186 @@
+/* ==========================================================================
+   CEDAR ROYAL CASINO — Native React Luxury Casino UI (Desktop & Mobile)
+   Minimal controls, maximum perceived craft, zero iframes, instant load.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+  --gold-100: #fff8c9;
+  --gold-300: #fde047;
+  --gold-500: #f5b027;
+  --gold-700: #b45309;
+  --gold-900: #451a03;
+  --emerald-400: #34d399;
+  --emerald-600: #059669;
+  --bg-obsidian: #04070f;
+  --topbar-h: 60px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100dvh;
+  background: var(--bg-obsidian);
+  color: #f8fafc;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+.luxe-app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100dvh;
+  background: radial-gradient(circle at 50% 0%, #131f3a 0%, #04070f 75%);
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.luxe-app.is-lobby {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(6, 10, 20, 0.75) 0%, rgba(3, 5, 12, 0.95) 100%),
+    url('/assets/casino-lobby-bg.jpg') center center / cover no-repeat;
+}
+
+/* ==========================================================================
+   1. MINIMALIST FLOATING GLASS TOPBAR (.luxe-topbar)
+   ========================================================================== */
+.luxe-topbar {
+  position: relative;
+  z-index: 50;
+  height: var(--topbar-h);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: linear-gradient(180deg, rgba(6, 10, 20, 0.92) 0%, rgba(6, 10, 20, 0.72) 100%);
+  border-bottom: 1px solid rgba(245, 196, 81, 0.22);
+  backdrop-filter: blur(18px);
+  flex-shrink: 0;
+}
+
+.luxe-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.luxe-brand-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(245, 196, 81, 0.35));
+}
+
+.luxe-brand-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.05;
+}
+
+.luxe-brand-text strong {
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  background: linear-gradient(180deg, #fff8c9 0%, #f5b027 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luxe-brand-text span {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #94a3b8;
+}
+
+/* Recessed Smoked-Glass Game Switcher */
+.luxe-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(3, 6, 14, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+.luxe-tab {
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.luxe-tab:hover:not(.is-active) {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.luxe-tab.is-active {
+  border-color: #fef08a;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.55), transparent 58%),
+    linear-gradient(180deg, #ffe98a 0%, #f59e0b 55%, #9a3412 100%);
+  color: #1c0a00;
+  font-weight: 900;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 10px rgba(245, 158, 11, 0.45);
+}
+
+/* Right Balance Capsule & Info Icon */
+.luxe-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.luxe-wallet-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 5px 0 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #050914 0%, #0d1629 100%);
+  border: 1px solid rgba(245, 196, 81, 0.42);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.9),
+    0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.luxe-wallet-currency {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--gold-500);
+}
+
+.luxe-wallet-amount {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fffbeb;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.luxe-wallet-plus {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #6ee7b7;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.55), transparent 55%),
+    linear-gradient(180deg, #34d399 0%, #059669 60%, #064e3b 100%);
+  color: #022c22;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 2px 6px rgba(16, 185, 129, 0.4);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.luxe-wallet-plus:hover {
+  filter: brightness(1.12);
+  transform: scale(1.05);
+}
+
+.luxe-wallet-plus:active {
+  transform: scale(0.95);
+}
+
+.luxe-circle-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 196, 81, 0.35);
+  background: linear-gradient(180deg, #1b2438 0%, #0c1220 100%);
+  color: #fde68a;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 3px 8px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease;
+}
+
+.luxe-circle-icon:hover {
+  border-color: var(--gold-300);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.luxe-toast {
+  position: fixed;
+  top: calc(var(--topbar-h) + 12px);
+  right: 20px;
+  z-index: 100;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #065f46 0%, #022c22 100%);
+  border: 1px solid #34d399;
+  color: #ecfdf5;
+  font-size: 12.5px;
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+}
+
+/* ==========================================================================
+   2. FULL-BLEED GAME STAGE (.luxe-stage)
+   ========================================================================== */
+.luxe-stage {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: calc(100dvh - var(--topbar-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 18px;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.luxe-stage.is-cedarcules {
+  background-image:
+    radial-gradient(circle at 50% 35%, rgba(6, 12, 24, 0) 0%, rgba(3, 6, 14, 0.55) 100%),
+    url('/cedar/games/Cedarcules/assets/background-desktop.jpg');
+}
+
+.luxe-stage.is-cedarwheel {
+  background-image:
+    radial-gradient(circle at 50% 45%, rgba(20, 14, 5, 0.25) 0%, rgba(8, 6, 2, 0.75) 100%),
+    url('/cedar/games/CedarWheel/assets/background-desktop.jpg');
+}
+
+.luxe-stage.is-cedarplinko {
+  background-image:
+    radial-gradient(circle at 50% 45%, rgba(10, 6, 24, 0.2) 0%, rgba(3, 4, 14, 0.75) 100%),
+    url('/cedar/games/CedarPlinko/assets/background-desktop.jpg');
+}
+
+/* ==========================================================================
+   3. CEDARCULES 5x3 OLYMPUS CABINET (.luxe-reel-cabinet)
+   ========================================================================== */
+.luxe-slot-centerpiece {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.luxe-reel-cabinet {
+  --cab-w: min(92vw, 720px, calc((100dvh - 180px) * 1.333));
+  position: relative;
+  width: max(300px, var(--cab-w));
+  height: calc(max(300px, var(--cab-w)) * 0.75);
+  padding: calc(max(300px, var(--cab-w)) * 0.076) calc(max(300px, var(--cab-w)) * 0.088);
+  filter: drop-shadow(0 26px 55px rgba(0, 0, 0, 0.88));
+}
+
+.luxe-cabinet-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.luxe-symbol-grid {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: clamp(5px, 0.85vw, 9px);
+  padding: clamp(6px, 1vw, 12px);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(17, 30, 56, 0.95) 0%, rgba(4, 8, 17, 0.98) 100%);
+  box-shadow: inset 0 0 38px rgba(0, 0, 0, 0.92);
+}
+
+.luxe-symbol-cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  border-radius: clamp(8px, 1.1vw, 13px);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(30, 48, 84, 0.55) 0%, rgba(8, 14, 26, 0.94) 100%);
+  border: 1px solid rgba(245, 196, 81, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 4px 12px rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6%;
+  transition: transform 0.22s ease, opacity 0.22s ease, box-shadow 0.22s ease;
+}
+
+.luxe-symbol-cell.tier-wild,
+.luxe-symbol-cell.tier-high {
+  border-color: rgba(245, 196, 81, 0.42);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(120, 53, 15, 0.35) 0%, rgba(9, 15, 28, 0.95) 100%);
+}
+
+.luxe-symbol-cell img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.65));
+  transition: transform 0.22s ease;
+}
+
+.luxe-symbol-cell.is-spinning img {
+  animation: luxe-reel-blur 0.14s linear infinite;
+  filter: blur(2px);
+  opacity: 0.72;
+}
+
+.luxe-symbol-cell.is-dimmed {
+  opacity: 0.42;
+  filter: saturate(0.6);
+}
+
+.luxe-symbol-cell.is-winner {
+  z-index: 3;
+  border-color: #fef08a;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.42) 0%, rgba(24, 16, 5, 0.95) 100%);
+  box-shadow:
+    0 0 0 2px #fde047,
+    0 0 26px rgba(250, 204, 21, 0.85),
+    inset 0 0 16px rgba(254, 240, 138, 0.45);
+  animation: luxe-win-pulse 0.7s ease-in-out infinite alternate;
+}
+
+.luxe-wild-badge {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f59e0b 0%, #78350f 100%);
+  border: 1px solid #fef08a;
+  color: #fffbeb;
+  font-size: clamp(7.5px, 0.9vw, 10.5px);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.luxe-win-banner {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  z-index: 8;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(254, 240, 138, 0.28), transparent 70%),
+    linear-gradient(180deg, rgba(20, 14, 4, 0.96) 0%, rgba(8, 5, 2, 0.98) 100%);
+  border: 2px solid #fde047;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.85),
+    0 0 32px rgba(245, 158, 11, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  animation: luxe-banner-pop 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.luxe-win-banner span {
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #fde047;
+}
+
+.luxe-win-banner strong {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(245, 158, 11, 0.8);
+}
+
+.luxe-win-banner small {
+  font-size: 10.5px;
+  color: #fcd34d;
+}
+
+@keyframes luxe-reel-blur {
+  0% {
+    transform: translateY(-20%) scaleY(1.12);
+  }
+  50% {
+    transform: translateY(20%) scaleY(1.12);
+  }
+  100% {
+    transform: translateY(-20%) scaleY(1.12);
+  }
+}
+
+@keyframes luxe-win-pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes luxe-banner-pop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* ==========================================================================
+   4. SOLAR WHEEL & PRISM PLINKO CENTERPIECES
+   ========================================================================== */
+.luxe-arcade-centerpiece {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.luxe-risk-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(5, 9, 20, 0.82);
+  border: 1px solid rgba(245, 196, 81, 0.3);
+  backdrop-filter: blur(12px);
+}
+
+.luxe-risk-pill {
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.luxe-risk-pill.is-active {
+  background: linear-gradient(180deg, #fde047 0%, #d97706 100%);
+  color: #1c0a00;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+}
+
+/* Solar Wheel */
+.luxe-wheel-frame {
+  position: relative;
+  width: min(76vw, 410px, calc(100dvh - 250px));
+  height: min(76vw, 410px, calc(100dvh - 250px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.85));
+}
+
+.luxe-wheel-pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
+}
+
+.luxe-wheel-svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 2.55s cubic-bezier(0.12, 0.84, 0.14, 1);
+}
+
+.luxe-wheel-hub {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: #fde047;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* Prism Plinko */
+.luxe-plinko-board {
+  width: min(92vw, 460px);
+  padding: 12px 10px 14px;
+  border-radius: 24px;
+  background: rgba(6, 11, 24, 0.88);
+  border: 1.5px solid rgba(245, 196, 81, 0.35);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.luxe-plinko-svg {
+  width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 290px);
+  display: block;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
+}
+
+.luxe-plinko-svg-bucket {
+  cursor: default;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.luxe-plinko-svg-bucket.is-hit {
+  transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   5. BESPOKE FLOATING BOTTOM CONTROL DOCK (.luxe-dock)
+   Minimal buttons, tactile 3D brushed gold & smoked glass.
+   ========================================================================== */
+.luxe-dock {
+  position: relative;
+  z-index: 25;
+  width: min(560px, 96vw);
+  height: 68px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(16, 24, 44, 0.92) 0%, rgba(6, 10, 20, 0.97) 100%);
+  border: 1.5px solid rgba(245, 196, 81, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 201, 0.35),
+    0 18px 45px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.luxe-dock-bet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+}
+
+.luxe-dock-win {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+}
+
+.luxe-dock-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 74px;
+  line-height: 1.15;
+}
+
+.luxe-dock-readout span {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #94a3b8;
+}
+
+.luxe-dock-readout strong {
+  font-size: 15px;
+  font-weight: 900;
+  color: #f8fafc;
+  font-variant-numeric: tabular-nums;
+}
+
+.luxe-dock-readout.is-win strong {
+  color: #fde047;
+  text-shadow: 0 0 14px rgba(250, 204, 21, 0.65);
+}
+
+/* Tactile Circular Brushed-Metal Stepper & Mute Buttons */
+.luxe-metal-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245, 196, 81, 0.55);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.22), transparent 55%),
+    linear-gradient(180deg, #24304c 0%, #0d1424 100%);
+  color: #fef08a;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 3px 0 #050811,
+    0 6px 14px rgba(0, 0, 0, 0.6);
+  transition: transform 0.1s ease, filter 0.15s ease, border-color 0.15s ease;
+}
+
+.luxe-metal-btn:hover:not(:disabled) {
+  filter: brightness(1.18);
+  border-color: #fef08a;
+}
+
+.luxe-metal-btn:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.luxe-metal-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Centerpiece 3D Sculpted Circular Spin Orb */
+.luxe-spin-orb {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin-top: -22px;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(180deg, #fff8c9 0%, #d97706 50%, #451a03 100%);
+  cursor: pointer;
+  box-shadow:
+    0 6px 0 #3b1502,
+    0 14px 32px rgba(0, 0, 0, 0.9),
+    0 0 28px rgba(245, 158, 11, 0.5);
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.luxe-spin-orb:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.luxe-spin-orb:active:not(:disabled) {
+  transform: translateY(3px) scale(0.97);
+}
+
+.luxe-spin-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 252, 220, 0.85);
+  background:
+    radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.72), transparent 48%),
+    radial-gradient(circle at 50% 85%, rgba(251, 191, 36, 0.5), transparent 60%),
+    linear-gradient(180deg, #fde047 0%, #f59e0b 52%, #b45309 100%);
+  color: #1e0b00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.luxe-spin-orb.is-busy .luxe-spin-core svg {
+  animation: luxe-orb-spin 0.65s linear infinite;
+}
+
+@keyframes luxe-orb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   6. CATALOG LOBBY VIEW (.luxe-lobby)
+   ========================================================================== */
+.luxe-lobby {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 28px 20px 60px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.luxe-section-header {
+  margin-bottom: 16px;
+}
+
+.luxe-section-header span {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--gold-500);
+  margin-bottom: 4px;
+}
+
+.luxe-section-header h2 {
+  margin: 0;
+  font-size: clamp(20px, 2.5vw, 26px);
+}
+
+.luxe-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.luxe-featured-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0d1527;
+  border: 1px solid rgba(245, 196, 81, 0.3);
+  cursor: pointer;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.luxe-featured-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-300);
+}
+
+.luxe-featured-art {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.luxe-featured-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.luxe-rtp-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(4, 8, 18, 0.88);
+  border: 1px solid rgba(245, 196, 81, 0.45);
+  color: var(--gold-300);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+.luxe-featured-meta {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.luxe-featured-meta h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.luxe-featured-meta p {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.luxe-play-cta {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe98a 0%, #f59e0b 58%, #9a3412 100%);
+  color: #1c0a00;
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+}
+
+.luxe-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 14px;
+}
+
+.luxe-catalog-tile {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0b1222;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+
+.luxe-catalog-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(245, 196, 81, 0.45);
+}
+
+.luxe-catalog-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.luxe-catalog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.luxe-catalog-img span {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(4, 8, 18, 0.85);
+  color: var(--gold-300);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.luxe-catalog-caption {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.luxe-catalog-caption strong {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.luxe-catalog-caption small {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   7. MODAL SHEET (.luxe-modal)
+   ========================================================================== */
+.luxe-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(3, 6, 14, 0.82);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.luxe-modal {
+  width: min(680px, 100%);
+  max-height: 86dvh;
+  overflow-y: auto;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #121c34 0%, #070c18 100%);
+  border: 1.5px solid rgba(245, 196, 81, 0.5);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.luxe-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.luxe-modal-head h2 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--gold-100);
+}
+
+.luxe-modal-section h3 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.luxe-paytable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.luxe-paytable-card {
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(5, 9, 18, 0.8);
+  border: 1px solid rgba(245, 196, 81, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.luxe-paytable-card img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.luxe-paytable-card strong {
+  font-size: 11.5px;
+}
+
+.luxe-paytable-card span {
+  font-size: 10.5px;
+  color: var(--gold-300);
+  font-weight: 700;
+}
+
+.luxe-fairness-box {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(5, 9, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.luxe-verify-badge {
+  margin: 0;
+  color: #6ee7b7;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.luxe-seed-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.luxe-seed-row span {
+  color: #94a3b8;
+}
+
+.luxe-seed-row code {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f8fafc;
+  max-width: 65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   8. MOBILE PORTRAIT OPTIMIZATION (<= 720px)
+   ========================================================================== */
+@media (max-width: 720px) {
+  :root {
+    --topbar-h: 88px;
+  }
+
+  .luxe-topbar {
+    height: auto;
+    min-height: var(--topbar-h);
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .luxe-brand {
+    order: 1;
+  }
+
+  .luxe-topbar-right {
+    order: 2;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .luxe-switcher {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .luxe-tab {
+    flex: 1;
+    height: 29px;
+    padding: 0 6px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .luxe-wallet-pill {
+    height: 32px;
+    padding: 0 4px 0 10px;
+  }
+
+  .luxe-wallet-amount {
+    font-size: 12.5px;
+  }
+
+  .luxe-wallet-plus {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  .luxe-circle-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .luxe-stage {
+    padding: 8px 8px 14px;
+  }
+
+  .luxe-stage.is-cedarcules {
+    background-image:
+      radial-gradient(circle at 50% 40%, rgba(6, 12, 24, 0.06) 0%, rgba(3, 6, 14, 0.72) 100%),
+      url('/cedar/games/Cedarcules/assets/background-mobile.jpg');
+  }
+
+  .luxe-reel-cabinet {
+    --cab-w: min(96vw, calc((100dvh - 195px) * 1.333));
+  }
+
+  .luxe-dock {
+    height: 62px;
+    padding: 0 12px;
+    gap: 6px;
+  }
+
+  .luxe-dock-bet {
+    gap: 6px;
+  }
+
+  .luxe-dock-win {
+    gap: 6px;
+  }
+
+  .luxe-dock-readout {
+    min-width: 58px;
+  }
+
+  .luxe-dock-readout span {
+    font-size: 8px;
+  }
+
+  .luxe-dock-readout strong {
+    font-size: 13px;
+  }
+
+  .luxe-metal-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 17px;
+  }
+
+  .luxe-spin-orb {
+    width: 72px;
+    height: 72px;
+    margin-top: -18px;
+  }
+}
